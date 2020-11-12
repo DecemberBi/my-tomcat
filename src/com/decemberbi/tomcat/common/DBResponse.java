@@ -1,0 +1,22 @@
+package com.decemberbi.tomcat.common;
+
+import java.io.OutputStream;
+
+public class DBResponse {
+
+    private OutputStream out;
+
+    public DBResponse(OutputStream out) {
+        this.out = out;
+    }
+
+    public void write(String s) throws Exception {
+        StringBuilder sb = new StringBuilder();
+        sb.append("HTTP/1.1 200 OK\n")
+                .append("Content-Type: text/html;\n")
+                .append("\r\n")
+                .append(s);
+        out.write(sb.toString().getBytes());
+    }
+
+}
