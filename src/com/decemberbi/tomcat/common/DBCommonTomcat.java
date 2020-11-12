@@ -33,6 +33,7 @@ public class DBCommonTomcat {
         init();
 
         try {
+            System.out.println("my dbcommon tomcat start at port:" + this.port);
             serverSocket = new ServerSocket(this.port);
             while (true) {
                 Socket socket = serverSocket.accept();

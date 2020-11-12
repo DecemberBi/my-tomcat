@@ -11,6 +11,7 @@ public class DBSecondServlet extends DBServlet {
 
     @Override
     public void doPost(DBRequest request, DBResponse response) throws Exception {
+        System.out.println("second servlet response");
         response.write("This is Second Servlet");
     }
 }

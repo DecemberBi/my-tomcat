@@ -11,6 +11,7 @@ public class DBFirstServlet extends DBServlet {
 
     @Override
     public void doPost(DBRequest request, DBResponse response) throws Exception {
+        System.out.println("first servlet response");
         response.write("This is First Servlet");
     }
 }
