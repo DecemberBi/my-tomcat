@@ -2,11 +2,14 @@ package com.decemberbi.tomcat.common;
 
 import java.io.OutputStream;
 
-public class DBResponse {
+public class DBCommonResponse {
 
     private OutputStream out;
 
-    public DBResponse(OutputStream out) {
+    public DBCommonResponse() {
+    }
+
+    public DBCommonResponse(OutputStream out) {
         this.out = out;
     }
 

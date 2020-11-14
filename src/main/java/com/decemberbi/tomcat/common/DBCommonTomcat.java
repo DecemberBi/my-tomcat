@@ -1,7 +1,5 @@
-package com.decemberbi.tomcat.netty;
+package com.decemberbi.tomcat.common;
 
-import com.decemberbi.tomcat.common.DBRequest;
-import com.decemberbi.tomcat.common.DBResponse;
 import com.decemberbi.tomcat.config.DBServlet;
 
 import java.io.FileInputStream;
@@ -13,7 +11,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-public class DBNettyTomcat {
+/**
+ * 普通版tomcat
+ */
+public class DBCommonTomcat {
 
     private final int port = 8080;
     private ServerSocket serverSocket;
@@ -21,30 +22,31 @@ public class DBNettyTomcat {
 
     private Properties webXml = new Properties();
 
+    public static void main(String[] args) {
+        new DBCommonTomcat().start();
+    }
+
     public void start() {
 
         init();
 
         try {
-            System.out.println("my dbnetty tomcat start at port:" + this.port);
-            /**
-             * 这里替换成netty进行网络通信
-             */
-            /*serverSocket = new ServerSocket(this.port);
+            System.out.println("my dbcommon tomcat start at port:" + this.port);
+            serverSocket = new ServerSocket(this.port);
             while (true) {
                 Socket socket = serverSocket.accept();
                 process(socket);
-            }*/
-//            EventLoopGroup
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     private void init() {
+
         try {
             String WEB_INF = this.getClass().getResource("/").getPath();
-            FileInputStream fis = new FileInputStream(WEB_INF + "resource/web.properties");
+            FileInputStream fis = new FileInputStream(WEB_INF + "web.properties");
             webXml.load(fis);
 
             for (Object k : webXml.keySet()) {
@@ -62,14 +64,15 @@ public class DBNettyTomcat {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
     private void process(Socket socket) throws Exception {
         InputStream inputStream = socket.getInputStream();
         OutputStream outputStream = socket.getOutputStream();
 
-        DBRequest request = new DBRequest(inputStream);
-        DBResponse response = new DBResponse(outputStream);
+        DBCommonRequest request = new DBCommonRequest(inputStream);
+        DBCommonResponse response = new DBCommonResponse(outputStream);
 
         String url = request.getUrl();
         if (servletMapping.containsKey(url)) {

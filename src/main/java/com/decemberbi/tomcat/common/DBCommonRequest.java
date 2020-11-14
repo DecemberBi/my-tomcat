@@ -3,13 +3,17 @@ package com.decemberbi.tomcat.common;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class DBRequest {
+public class DBCommonRequest {
 
     private String method;
 
     private String url;
 
-    public DBRequest(InputStream in) {
+    public DBCommonRequest() {
+
+    }
+
+    public DBCommonRequest(InputStream in) {
         try {
             String content = "";
             byte[] buff = new byte[1024];
