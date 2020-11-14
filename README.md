@@ -1,5 +1,5 @@
 # my-tomcat
-手写tomcat
+手写简易版tomcat
 ```
 DB 是 DecemberBi的缩写
 ```
